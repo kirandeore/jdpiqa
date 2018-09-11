@@ -14,3 +14,7 @@ npm i -g exp
 exp build:android    or    exp ba   or      exp build:ios
 exp build:status
 
+
+Create a local branch // https://dont-be-afraid-to-commit.readthedocs.io/en/latest/git/commandlinegit.html
+git checkout -b <branch-name-no-spaces>    // this creates a new branch as well as switches branch
+
