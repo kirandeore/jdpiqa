@@ -29,9 +29,9 @@ https://career.guru99.com/top-22-java-design-patterns-interview-questions/
 Next, place the ad unit inside your app
 Follow these instructions:
 Complete the instructions in the Google Mobile Ads SDK guide using this app ID:
-Java Design Patterns Interview Questions And Answers  ca-app-pub-8338409911685300~2976715345
+Java Design Patterns Interview Questions And Answers    ca-app-pub-8338409911685300~2976715345
 Follow the banner implementation guide to integrate the SDK. You'll specify ad type, size, and placement when you integrate the code using this ad unit ID:
-jdpiqa banner   ca-app-pub-8338409911685300/7755658488
+jdpiqa banner      ca-app-pub-8338409911685300/7755658488
 Review the AdMob policies to ensure your implementation complies.
 
 // dont remove test device id from admod
