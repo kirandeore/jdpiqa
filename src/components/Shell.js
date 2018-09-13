@@ -13,7 +13,6 @@ class Shell extends React.Component {
   super(props)
 
   this.state = {
-    heading: 'Interview Questions',
     questionList: null
   }
  }
