@@ -18,6 +18,12 @@ exp build:status
 Create a local branch // https://dont-be-afraid-to-commit.readthedocs.io/en/latest/git/commandlinegit.html
 git checkout -b <branch-name-no-spaces>    // this creates a new branch as well as switches branch
 
+// merge your branch to master
+git checkout branch-name
+git checkout master
+git merge branch-name
+git push
+
 Load custom fonts in expo
 https://medium.com/@piyushgupta_81472/using-custom-fonts-in-expo-the-best-way-81f0e785580c
 
