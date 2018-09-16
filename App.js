@@ -12,6 +12,11 @@ import { material } from 'react-native-typography'
 import { Asset, AppLoading, SplashScreen } from 'expo';
 import constants from './src/utils/constants'
 
+
+const firebase = require('firebase');
+// Required for side-effects
+require('firebase/firestore');
+
 global._ = _
 global.material = material
 global.constants = constants
@@ -31,6 +36,45 @@ export default class App extends React.Component {
       'calibri': require('./assets/fonts/calibri.ttf'),
       'comic': require('./assets/fonts/comic.ttf')
     })
+  }
+
+  componentWillMount() {
+    const defaultApp = firebase.initializeApp({
+      apiKey: "AIzaSyAjzNDi4fBMjpUwxBsj_oEcsRsZNcsjF2U",
+      authDomain: "jdpiqa.firebaseapp.com",
+      databaseURL: "https://jdpiqa.firebaseio.com",
+      projectId: "jdpiqa",
+      storageBucket: "jdpiqa.appspot.com",
+      messagingSenderId: "961745701287"
+    })
+
+    // Some nonsense...
+    firebase.firestore().settings({ timestampsInSnapshots: true });
+
+    firebase.firestore().collection('questionandanswers')
+      .get()
+      .then((r) => r.forEach(doc => console.log(doc.data(), doc.id) ))
+
+  //   defaultApp.onReady().then((app) => {
+  //     // --- ready ---
+  //     // use `app` arg, kittensApp var or `app('kittens')` to access modules
+  //     // and their methods. e.g:
+  //     console.log(firebase.app('jdpiqa').name)
+  //  })
+    // const defaultFirestore = defaultApp.firestore();
+
+    // console.log('----',defaultFirestore)
+
+    // const qnaRef = defaultFirestore.collection('questionandanswers').doc('Lcztnep5JuA6aXtOoing')
+
+    // qnaRef.get().then((r) => console.log(r))
+
+
+    // firebase.firestore().ref('/questionandanswers/Lcztnep5JuA6aXtOoing')
+    //     .once('value')
+    //     .then(snapshot => console.log(snapshot.val()))
+
+
   }
 
   render() {

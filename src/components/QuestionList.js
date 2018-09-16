@@ -24,6 +24,24 @@ export default class QuestionList extends React.Component {
         super(props)
     }
 
+    componentDidMount() {
+        // const db = firebase.firestore()
+
+        // db.collection('questionandanswers')
+        //     .doc()
+        //     .set({
+        //         question: 'aaasd',
+        //         answer: 'sdfadfsdaf'
+        //     })
+
+        
+
+        // .then(response => console.log(response.val()))
+
+        // fetch('https://us-central1-jdpiqa.cloudfunctions.net/getJdpiqaData')
+        // .then(response => console.log(response))
+    }
+
     render() {
         return (
           <View>

@@ -42,3 +42,22 @@ Review the AdMob policies to ensure your implementation complies.
 
 // dont remove test device id from admod
 https://stackoverflow.com/questions/45069642/why-remove-admobs-addtestdevice-in-production
+
+
+// Firebase locked mode
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+
+// Firebase test mode
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write;
+    }
+  }
+}
