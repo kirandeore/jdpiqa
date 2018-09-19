@@ -61,3 +61,16 @@ service cloud.firestore {
     }
   }
 }
+
+// setup clinet side connection in cloud firestore app
+https://blog.expo.io/instagram-clone-using-firebase-react-native-expo-cc32f61c7bba
+
+// debug google cloud functions
+https://www.youtube.com/watch?v=TH0O1yNMz3A
+https://github.com/GoogleCloudPlatform/cloud-functions-emulator
+sudo killall -9 node
+
+functions help
+functions start
+cd functions
+functions deploy getJdpiqaData --trigger-http
