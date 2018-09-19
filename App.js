@@ -1,27 +1,34 @@
 import React from 'react';
 import { Scene, Stack, Router } from 'react-native-router-flux'
 import _ from 'lodash'
+import axios from 'axios'
 import { Font } from 'expo'
 // import store from './src/store'
 import { createStore } from 'redux'
 import { Provider, connect } from 'react-redux'
-import reducers from './src/reducers'
+import { combineReducers } from 'redux';
+import reducersCreator from './src/reducers'
 import Shell from './src/components/Shell'
-import Intro from './src/components/Intro'
 import { material } from 'react-native-typography'
-import { Asset, AppLoading, SplashScreen } from 'expo';
+import { AppLoading, SplashScreen } from 'expo';
 import constants from './src/utils/constants'
+import config from './src/config'
+import axiosInstanceCreator from './src/axios'
+import serviceCreator from './src/services'
 
-const firebase = require('firebase');
-// Required for side-effects
-require('firebase/firestore');
+const axiosInstanceCollection = _.mapValues(axiosInstanceCreator, value => value({ axios, config }))
+
+const serviceCollection = _.mapValues(serviceCreator, value => value({ axiosInstanceCollection }))
+
+const reducersCollection = _.mapValues(reducersCreator, value => value({ serviceCollection }))
 
 global._ = _
 global.material = material
 global.constants = constants
+global.config = config
 
 const store = createStore(
-  reducers
+  combineReducers(reducersCollection)
 )
 
 export default class App extends React.Component {
@@ -38,21 +45,7 @@ export default class App extends React.Component {
   }
 
   componentWillMount() {
-    const defaultApp = firebase.initializeApp({
-      apiKey: "AIzaSyAjzNDi4fBMjpUwxBsj_oEcsRsZNcsjF2U",
-      authDomain: "jdpiqa.firebaseapp.com",
-      databaseURL: "https://jdpiqa.firebaseio.com",
-      projectId: "jdpiqa",
-      storageBucket: "jdpiqa.appspot.com",
-      messagingSenderId: "961745701287"
-    })
-
-    // Some nonsense...
-    defaultApp.firestore().settings({ timestampsInSnapshots: true });
-
-    defaultApp.firestore().collection('questionandanswers')
-      .get()
-      .then((r) => r.forEach(doc => console.log(doc.data(), doc.id) ))
+    
   }
 
   render() {
