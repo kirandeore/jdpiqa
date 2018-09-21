@@ -5,16 +5,16 @@ import QuestionList from './QuestionList'
 
 // import store from './src/store'
 import { createStore, compose, applyMiddleware } from 'redux'
-import { Provider, connect } from 'react-redux'
-import actions from '../actions';
+import { connect } from 'react-redux'
+import actions from '../actions'
 
 class Shell extends React.Component {
  constructor(props) {
   super(props)
 
-  this.state = {
-    questionList: null
-  }
+  // this.state = {
+  //   questionList: null
+  // }
  }
 
  getDataFromServer() {
@@ -23,13 +23,17 @@ class Shell extends React.Component {
       if (err) {
         console.error('failed')
       } else {
-        this.setState({ ...this.state, questionList: results })
+        // this.setState({ ...this.state, questionList: results })
+        this.props.setQuestionsInReduxStore({ questionList: results })
       }
     }
   })
  }
 
  componentDidMount() {
+  // console.log(this.props.fetchQuestionsFromRedux())
+  
+  
   this.getDataFromServer()
  }
 
@@ -41,7 +45,7 @@ class Shell extends React.Component {
         placement="left"
         centerComponent={{ text: this.state.heading }}
         /> */}
-        <QuestionList data={this.state.questionList}/>
+        <QuestionList data={this.props.questionList}/>
        </View>
     )
   }
@@ -56,4 +60,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(null, actions) (Shell)
+const mapStateToProps = ({ QuestionListReducer }) => {
+  const { questionList } = QuestionListReducer
+
+  return { questionList }
+}
+
+export default connect(mapStateToProps, { ...actions }) (Shell)

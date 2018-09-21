@@ -1,15 +1,13 @@
 import data from './../data'
 
 const INITIAL_STATE = {
-    // questionList: []
+    questionList: null
 }
 
 export default ({ serviceCollection }) => (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case 'FETCH_QUESTIONS_FROM_REDUX': {
-            return { ...state,
-                questionList: data
-            }
+            return state
         }
         case 'FETCH_QUESTIONS_FROM_SERVER': {
             serviceCollection.qNaService.fetchQuestionNanswers()
@@ -27,6 +25,11 @@ export default ({ serviceCollection }) => (state = INITIAL_STATE, action) => {
             })
             
             return state
+        }
+        case 'SET_QUESTIONS_IN_REDUX_STORE': {
+            const { questionList } = action.payload
+            
+            return {...state, questionList }
         }
         default:
             return state

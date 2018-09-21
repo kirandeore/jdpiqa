@@ -2,15 +2,18 @@ import React from 'react';
 import { Scene, Stack, Router } from 'react-native-router-flux'
 import _ from 'lodash'
 import axios from 'axios'
-import { Font } from 'expo'
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import { AsyncStorage } from 'react-native'
+import { Font, AppLoading, SplashScreen } from 'expo'
+// import { REHYDRATE } from 'redux-persist/constants'
 // import store from './src/store'
 import { createStore } from 'redux'
 import { Provider, connect } from 'react-redux'
-import { combineReducers } from 'redux';
+import { combineReducers, compose } from 'redux';
 import reducersCreator from './src/reducers'
 import Shell from './src/components/Shell'
 import { material } from 'react-native-typography'
-import { AppLoading, SplashScreen } from 'expo';
 import constants from './src/utils/constants'
 import config from './src/config'
 import axiosInstanceCreator from './src/axios'
@@ -27,9 +30,21 @@ global.material = material
 global.constants = constants
 global.config = config
 
+const combinedReducer = combineReducers(reducersCollection)
+
+const persistConfig = {
+  key: 'root',
+  storage, // defaults to localStorage for web and AsyncStorage for react-native
+  whiteList: ['QuestionListReducer']
+}
+
+// const persistedReducer = persistReducer(persistConfig, combinedReducer)
+
 const store = createStore(
-  combineReducers(reducersCollection)
+  combinedReducer // persistedReducer
 )
+
+// let persistor = persistStore(store)  // persistor.purge()/ flush()/ pause()/ persist()
 
 export default class App extends React.Component {
   state = {
