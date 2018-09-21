@@ -10,6 +10,7 @@ export default ({ serviceCollection }) => (state = INITIAL_STATE, action) => {
             return state
         }
         case 'FETCH_QUESTIONS_FROM_SERVER': {
+            console.info('Getting data from server...')
             serviceCollection.qNaService.fetchQuestionNanswers()
             .then((r) => {
                 const { callback } = action.payload

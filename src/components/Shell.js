@@ -33,7 +33,10 @@ class Shell extends React.Component {
  componentDidMount() {
   // console.log(this.props.fetchQuestionsFromRedux())
   
-  
+  if (this.props.questionList && this.props.questionList.length > 0) {
+    return
+  }
+
   this.getDataFromServer()
  }
 

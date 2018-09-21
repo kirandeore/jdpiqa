@@ -1,5 +1,8 @@
 Debug tools
 https://github.com/jhen0409/react-native-debugger
+https://www.youtube.com/watch?v=JY279kbJ0KM
+brew update && brew cask install react-native-debugger
+npm i -s redux-devtools-extension
 
 https://github.com/facebook/react-devtools/tree/master/packages/react-devtools
 

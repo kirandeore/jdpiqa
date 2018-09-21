@@ -4,10 +4,12 @@ import _ from 'lodash'
 import axios from 'axios'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import { AsyncStorage } from 'react-native'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import { PersistGate } from 'redux-persist/integration/react'
 import { Font, AppLoading, SplashScreen } from 'expo'
 // import { REHYDRATE } from 'redux-persist/constants'
 // import store from './src/store'
+import { View, ActivityIndicator } from 'react-native'
 import { createStore } from 'redux'
 import { Provider, connect } from 'react-redux'
 import { combineReducers, compose } from 'redux';
@@ -18,6 +20,8 @@ import constants from './src/utils/constants'
 import config from './src/config'
 import axiosInstanceCreator from './src/axios'
 import serviceCreator from './src/services'
+
+console.log('----', __DEV__)
 
 const axiosInstanceCollection = _.mapValues(axiosInstanceCreator, value => value({ axios, config }))
 
@@ -33,18 +37,19 @@ global.config = config
 const combinedReducer = combineReducers(reducersCollection)
 
 const persistConfig = {
-  key: 'root',
+  key: 'root', // if you change is this then a new storage is created with different key, use for upgrade
   storage, // defaults to localStorage for web and AsyncStorage for react-native
-  whiteList: ['QuestionListReducer']
+  // whiteList: ['QuestionListReducer']
 }
 
-// const persistedReducer = persistReducer(persistConfig, combinedReducer)
+const persistedReducer = persistReducer(persistConfig, combinedReducer)
 
 const store = createStore(
-  combinedReducer // persistedReducer
+  persistedReducer, undefined, composeWithDevTools()
 )
 
-// let persistor = persistStore(store)  // persistor.purge()/ flush()/ pause()/ persist()
+let persistor = persistStore(store)  // persistor.purge()/ flush()/ pause()/ persist()
+persistor.purge()
 
 export default class App extends React.Component {
   state = {
@@ -59,8 +64,10 @@ export default class App extends React.Component {
     })
   }
 
-  componentWillMount() {
-    
+  renderLoading = () => {
+    <View>
+      <ActivityIndicator size="large" />
+    </View>
   }
 
   render() {
@@ -80,23 +87,25 @@ export default class App extends React.Component {
 
     return (
       <Provider store={store}>
-        <Router>
-          <Stack key="root">
-            {/* <Scene
-              key="intro"
-              component={Intro}
-              hideNavBar={true}
-            /> */}
-            <Scene key="shell"
-              component={Shell}
-              title="Java Interview Questions"
-              navigationBarStyle={{
-                backgroundColor: 'teal',
-              }}
-              titleStyle= {[global.material.headlineWhite ]}
-              renderLeftButton={null} />
-          </Stack>
-        </Router>
+        <PersistGate persistor={persistor} loading={this.renderLoading()}>
+          <Router>
+            <Stack key="root">
+              {/* <Scene
+                key="intro"
+                component={Intro}
+                hideNavBar={true}
+              /> */}
+              <Scene key="shell"
+                component={Shell}
+                title="Java Interview Questions"
+                navigationBarStyle={{
+                  backgroundColor: 'teal',
+                }}
+                titleStyle= {[global.material.headlineWhite ]}
+                renderLeftButton={null} />
+            </Stack>
+          </Router>
+        </PersistGate>
       </Provider>
     )
   }
