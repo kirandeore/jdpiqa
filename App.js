@@ -7,7 +7,6 @@ import storage from 'redux-persist/lib/storage'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { PersistGate } from 'redux-persist/integration/react'
 import { Font, AppLoading, SplashScreen } from 'expo'
-// import { REHYDRATE } from 'redux-persist/constants'
 // import store from './src/store'
 import { View, ActivityIndicator } from 'react-native'
 import { createStore } from 'redux'
@@ -21,7 +20,9 @@ import config from './src/config'
 import axiosInstanceCreator from './src/axios'
 import serviceCreator from './src/services'
 
-console.log('----', __DEV__)
+console.log('----', __DEV__,
+  config,
+  process.env.NODE_ENV)
 
 const axiosInstanceCollection = _.mapValues(axiosInstanceCreator, value => value({ axios, config }))
 
