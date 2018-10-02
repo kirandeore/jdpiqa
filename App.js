@@ -21,9 +21,7 @@ import config from './src/config'
 import axiosInstanceCreator from './src/axios'
 import serviceCreator from './src/services'
 
-console.log('-- Moment Wala--', __DEV__,
-  config,
-  process.env.NODE_ENV, moment)
+// console.log(__DEV__, process.env.NODE_ENV)
 
 const axiosInstanceCollection = _.mapValues(axiosInstanceCreator, value => value({ axios, config }))
 
@@ -52,6 +50,8 @@ const store = createStore(
 )
 
 let persistor = persistStore(store)  // persistor.purge()/ flush()/ pause()/ persist()
+
+// uncomment this line to purge all data
 // persistor.purge()
 
 export default class App extends React.Component {

@@ -1,21 +1,19 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ActivityIndicator } from 'react-native';
 // import { Header } from 'react-native-elements'
 import QuestionList from './QuestionList'
-
-// import store from './src/store'
-import { createStore, compose, applyMiddleware } from 'redux'
 import { connect } from 'react-redux'
 import actions from '../actions'
-import { isMoment } from 'moment';
 
 class Shell extends React.Component {
+ DAYS_TO_REFRESH_AFTER = 1
+ 
  constructor(props) {
   super(props)
 
-  // this.state = {
-  //   questionList: null
-  // }
+  this.state = {
+    isLoading: true
+  }
  }
 
  getDataFromServer() {
@@ -24,7 +22,7 @@ class Shell extends React.Component {
       if (err) {
         console.error('failed')
       } else {
-        // this.setState({ ...this.state, questionList: results })
+        this.setState({ ...this.state, isLoading: false })
         this.props.setQuestionsInReduxStore({ questionList: results })
       }
     }
@@ -33,20 +31,23 @@ class Shell extends React.Component {
 
  componentDidMount() {
   // console.log(this.props.fetchQuestionsFromRedux())
-
-  console.log(this.props.latestFetchDate, 'latestFetchDate')
-  
   const daysPassedSinceLastFetch = moment(moment().format()).diff(this.props.latestFetchDate, 'days')
 
-  console.log('daysPassedSinceLastFetch', daysPassedSinceLastFetch)
-
-  if (daysPassedSinceLastFetch > 10) {
+  if (daysPassedSinceLastFetch > this.DAYS_TO_REFRESH_AFTER || this.props.questionList === null) {
     this.props.setLastFetchDateInReduxStore({ latestFetchDate: moment().format() })
     this.getDataFromServer()
+  } else {
+    this.setState({ ...this.state, isLoading: false })
   }
  }
 
  render() {
+   if (this.state.isLoading) {
+    return <View style={[styles.container,
+      { alignItems: 'center', justifyContent: 'center' }]}>
+      <ActivityIndicator size="large" />  
+    </View>
+   }
     
     return (
       <View style={styles.container}>
@@ -63,9 +64,7 @@ class Shell extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
+    backgroundColor: '#fff'
   },
 });
 
