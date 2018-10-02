@@ -77,7 +77,7 @@ export default class QuestionList extends React.Component {
                             fontSize: 20,
                             textAlign: 'left',
                             fontFamily: 'calibri'
-                            }, global.material.thin ]}>{ item.answer }</Text>
+                            }, global.material.thin ]}>{ _.replace(item.answer, /<br\/>/g, "\n") }</Text>
                     </Card>
                 }
                 />
