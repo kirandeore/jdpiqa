@@ -1,9 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, ActivityIndicator, Text } from 'react-native';
 // import { Header } from 'react-native-elements'
 import QuestionList from './QuestionList'
 import { connect } from 'react-redux'
+import { AdMobBanner } from 'expo'
 import actions from '../actions'
+
+const ADUNITID = `ca-app-pub-8338409911685300/7755658488`
 
 class Shell extends React.Component {
  DAYS_TO_REFRESH_AFTER = 1
@@ -55,8 +58,19 @@ class Shell extends React.Component {
         placement="left"
         centerComponent={{ text: this.state.heading }}
         /> */}
-        <QuestionList data={this.props.questionList}/>
-       </View>
+        <Text>Placeholder for filter</Text>
+        <View
+          style={{ flex: 1 }}>
+          <QuestionList data={this.props.questionList} />
+        </View>
+        <AdMobBanner
+            style={{ height: 60 }}
+            bannerSize="fullBanner"
+            adUnitID={ADUNITID}
+            testDeviceID="EMULATOR"
+            didFailToReceiveAdWithError={this.bannerError}
+        />
+      </View>
     )
   }
 }
@@ -64,7 +78,10 @@ class Shell extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    justifyContent: 'space-between'
   },
 });
 
