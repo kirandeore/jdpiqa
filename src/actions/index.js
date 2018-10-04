@@ -14,5 +14,9 @@ export default {
     setLastFetchDateInReduxStore: ({ latestFetchDate }) => ({
         payload: { latestFetchDate },
         type: 'SET_LAST_FETCHED_DATE_IN_REDUX_STORE'
+    }),
+    filterByKeyword: ({ filterTerm }) => ({
+        payload: { filterTerm },
+        type: 'FILTER_BY_KEYWORD'
     })
 }

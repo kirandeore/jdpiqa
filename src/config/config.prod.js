@@ -5,5 +5,10 @@ export default {
             timeout: 10000
         }
     },
+    admob: {
+        jdpiqa: {
+            ADUNITID: 'ca-app-pub-8338409911685300/7755658488'
+        }
+    },
     env: 'production'
 }

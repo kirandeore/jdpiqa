@@ -15,7 +15,7 @@ import { Provider, connect } from 'react-redux'
 import { combineReducers, compose } from 'redux';
 import reducersCreator from './src/reducers'
 import Shell from './src/components/Shell'
-import { material } from 'react-native-typography'
+import { material, human } from 'react-native-typography'
 import constants from './src/utils/constants'
 import config from './src/config'
 import axiosInstanceCreator from './src/axios'
@@ -30,7 +30,10 @@ const serviceCollection = _.mapValues(serviceCreator, value => value({ axiosInst
 const reducersCollection = _.mapValues(reducersCreator, value => value({ serviceCollection, moment }))
 
 global._ = _
-global.material = material
+global.typography = {
+  material,
+  human
+}
 global.constants = constants
 global.config = config
 global.moment = moment
@@ -104,7 +107,7 @@ export default class App extends React.Component {
                 navigationBarStyle={{
                   backgroundColor: 'teal',
                 }}
-                titleStyle= {[global.material.headlineWhite ]}
+                titleStyle= {[ typography.material.headlineWhite ]}
                 renderLeftButton={null} />
             </Stack>
           </Router>
