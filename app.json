@@ -1,12 +1,15 @@
 {
   "expo": {
-    "name": "java-design-patterns-interview-questions-answers",
-    "description": "This project is really great.",
+    "name": "Java Design Patterns Interview Questions Answers",
+    "description": "In this edition of app, cracking the Java Coding Interview gives you the interview preparation you need to get the top software developer jobs. Questions in this app focuses on the software engineering skills to ace your interview. The app is updated with new interview questions and answers, as well as other advice Coding Standards in Java and Design And Development. ",
     "slug": "java-design-patterns-interview-questions-answers",
     "privacy": "public",
     "sdkVersion": "30.0.0",
-    "platforms": ["ios", "android"],
-    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "version": "0.4.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -21,7 +24,13 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.cashmoneysai.javadesignpatternsinterviewquestionsanswers"
+    },
+    "android": {
+      "package": "com.cashmoneysai.javadesignpatternsinterviewquestionsanswers",
+      "permissions": [],
+      "versionCode": 2
     }
   }
 }
