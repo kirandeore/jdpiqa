@@ -1,6 +1,6 @@
 const qNaService = ({ axiosInstanceCollection }) => ({
     fetchQuestionNanswers() {
-      return axiosInstanceCollection.jdpiqaInstance.get('/getJdpiqaData')  
+      return axiosInstanceCollection.jdpiqa.get('/getJdpiqaData/')  
     }
 })
 

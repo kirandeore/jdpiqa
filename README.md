@@ -91,3 +91,9 @@ publish on android
 
 
 npm start --reset-cache
+
+
+// cloud firestore authentication with custom tokens
+https://www.youtube.com/watch?v=WtYzHTXHBp0
+sign in with generated cutom token from above video
+https://firebase.google.com/docs/auth/admin/create-custom-tokens#sign_in_using_custom_tokens_on_clients

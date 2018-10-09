@@ -11,7 +11,6 @@ export default ({ serviceCollection, moment }) =>
                 return state
             }
             case 'FETCH_QUESTIONS_FROM_SERVER': {
-                console.info('Getting data from server...')
                 serviceCollection.qNaService.fetchQuestionNanswers()
                 .then(r => {
                     const { callback } = action.payload
@@ -45,7 +44,6 @@ export default ({ serviceCollection, moment }) =>
             case 'FILTER_BY_KEYWORD': {
                 const { filterTerm } = action.payload
                 const { questionList, originalCopyOfQuestionList } = state
-                console.log('filterTerm', filterTerm)
                 
                 if (filterTerm
                         && filterTerm.length >=3

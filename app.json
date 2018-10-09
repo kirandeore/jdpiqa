@@ -9,7 +9,7 @@
       "ios",
       "android"
     ],
-    "version": "0.4.0",
+    "version": "0.5.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -30,7 +30,7 @@
     "android": {
       "package": "com.cashmoneysai.javadesignpatternsinterviewquestionsanswers",
       "permissions": [],
-      "versionCode": 2
+      "versionCode": 3
     }
   }
 }

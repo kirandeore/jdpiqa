@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 export default class Intro extends React.Component {
  componentDidMount() {
     setTimeout(() => {
-      Actions.shell({ onBack: () => console.log('....going back') })
+    Actions.shell({ onBack: () => { /* console.log('....going back') */ } })
     }, 2000)
  }
 

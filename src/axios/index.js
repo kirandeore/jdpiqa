@@ -1,5 +1,5 @@
-const jdpiqaInstance = ({ axios, config }) => axios.create(config.axiosInstances.jdpiqa)
+const jdpiqa = ({ axios, config }) => axios.create(config.axios.jdpiqa)
 
 export default {
-  jdpiqaInstance
+  jdpiqa
 }

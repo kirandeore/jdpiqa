@@ -1,5 +1,5 @@
 export default {
-    axiosInstances: {
+    axios: {
         jdpiqa: {
             baseURL: 'https://us-central1-jdpiqa.cloudfunctions.net/',
             timeout: 10000

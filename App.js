@@ -85,7 +85,7 @@ export default class App extends React.Component {
             this.setState({...this.state, resourcesLoaded: true})
             SplashScreen.hide()
           }}
-          onError={() => console.log('Error loading resources')}
+        onError={() => { /* console.log('Error loading resources') */ } }
           autoHideSplash={false}
         />
       );
